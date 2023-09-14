@@ -13,14 +13,13 @@
         //acesso ea passagem e retorno do controller
         $objLogin->setUserName($userName);
         $objLogin->setUserEmail($userEmail);
-        $objLogin->setUserPass($userPass);//ira sofre modigicações
-
-
+        $objLogin->setUserPass($userPass);//ira sofre modificações
 
         $retorna = [
             'status' => true,
             'msg' => "<p style='color:#0f0'>Cadastro realizado com sucesso!!!</p>"
         ];
+        
     } else {
         $retorna = [
             'status' => false,
