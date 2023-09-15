@@ -68,5 +68,14 @@
             return $this->userHash;
         }
 
+        public function addLogin(String $fxlogin){
+            require '../../db/conn.php';
+
+            $sqlQuery = "SELECT usuario, email FROM LOGIN_DIEGO WHERE usuario = '$this->userName' OR email = '$this->userEmail'";
+
+
+
+        }
+
        
     }
