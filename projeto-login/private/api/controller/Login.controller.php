@@ -93,5 +93,8 @@ class Login
             }
             mysqli_free_result($result);
         }
+        if(($emailBD ===  $this->userEmail) || ($emailBD ===  $this->userEmail))){
+
+        }
     }
 }
