@@ -5,11 +5,11 @@ class Login
     private $userEmail;
     private $userPass;
     private $userHash;
-    private $userStatus;
+    // private $userStatus;
 
     // Set e Get do userName
 
-    public function setUserNome(String $userName)
+    public function setUserName(String $userName)
     {
         return $this->userName = $userName;
     }
@@ -77,7 +77,7 @@ class Login
         return $this->userHash;
     }
 
-    public function addLogin(String $fxlogin)
+    function addLogin(String $fxLogin)
     {
         require '../../db/conn.php';
 
@@ -93,8 +93,39 @@ class Login
             }
             mysqli_free_result($result);
         }
-        if(($emailBD ===  $this->userEmail) || ($emailBD ===  $this->userEmail)){
+        if (($emailBD ===  $this->userEmail) || ($userNameBD ===  $this->userName)) {
+            $retorna = [
+                'status' => false,
+                'userName' => $this->userName,
+                'userEmail' => $this->userEmail,
+                'msg' => "<p style='color=#f00'>ERRO - Usuário já cadastrado"
+            ];
+        } else {
+            $querySQL = "INSERT INTO LOGIN_DIEGO (idLogin, email, usuario, senha, hash, status) 
+            VALUES 
+            (Null, '$this->userEmail', '$this->userName', '$this->userPass', '$this->userHash', '1')";
 
+            // if ($conn->query($querySQL)) {
+            if (mysqli_query($conn, $querySQL)) {
+                // echo "Sucesso";
+                $retorna = [
+                    'status' => true,
+                    'userName' => $this->userName,
+                    'userEmail' => $this->userEmail,
+                    'msg' => "<p style='color=#0f0'>Usuário cadastrado com sucesso!!"
+                ];
+            } else {
+                // echo "Error: " . $querySQL . "<br>" . $conn->error;
+                $retorna = [
+                    'status' => false,
+                    'userName' => $this->userName,
+                    'userEmail' => $this->userEmail,
+                    'msg' => "<p style='color=#f00'>ERRO - Usuário não cadastrado!!"
+                ];
+            }
         }
+
+        $conn->close();
+        return $this->fxLogin = $retorna;
     }
 }

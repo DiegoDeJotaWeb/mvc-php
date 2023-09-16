@@ -1,5 +1,5 @@
 <?php
-// header('Content-Type: application/json');
+header('Content-Type: application/json');
 
 include_once '../controller/Login.controller.php';
 
@@ -16,16 +16,18 @@ if ($userPass === $userConfPass) {
     $fxLogin = "addLogin";
 
     //acesso ea passagem e retorno do controller
-    // $objLogin->setUserName($userName);
+
+    $objLogin->setUserName($userName);
+
     $objLogin->setUserEmail($userEmail);
 
     $objLogin->setUserPass($userPass, $userEmail); //ira sofre modificações
 
     $objLogin->setUserHash($userPass, $userEmail);
 
-    $objLogin->setUserStatus($userStatus);
+    // $objLogin->setUserStatus($userStatus);
 
-    $objLogin->setLogin($fxLogin);
+    $objLogin->addLogin($fxLogin);
 
     $retorna = $objLogin->$fxLogin;
 
@@ -42,9 +44,10 @@ if ($userPass === $userConfPass) {
 }
 
 
-// echo json_encode($retorna);
-
+echo json_encode($retorna);
+/*
 
 echo "<pre>";
 var_dump($objLogin());
 echo "</pre>";
+*/
