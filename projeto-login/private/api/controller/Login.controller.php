@@ -126,6 +126,6 @@ class Login
         }
 
         $conn->close();
-        return $this->fxLogin = $retorna;
+        return $this->$fxLogin = $retorna;
     }
 }
